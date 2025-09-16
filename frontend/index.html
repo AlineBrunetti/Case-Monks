@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard de Performance</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="login-container">
+    <h2>Login</h2>
+    <form id="login-form">
+      <input type="email" id="email" placeholder="E-mail" required>
+      <input type="password" id="password" placeholder="Senha" required>
+      <button type="submit">Entrar</button>
+      <p id="error-message"></p>
+    </form>
+  </div>
+
+  <div id="dashboard-container" style="display: none;">
+    <div class="header" style="display: flex; justify-content: space-between; align-items: center;">
+      <h2>Dashboard de Métricas</h2>
+      <button id="logout-btn">Logout</button>
+    </div>
+    <div class="filters" style="display: flex; padding-top: 10px; justify-content: space-between; align-items: center; gap: 15px; width: 100%;">
+        <!-- Grupo de filtros -->
+        <div class="filter-group" style="display: flex; align-items: center; gap: 10px;">
+            <div class="date-range">
+            <label for="start_date">Período:</label>
+            <div class="inputs" style="display: flex; align-items: center; gap: 5px;">
+                <input type="date" id="start_date">
+                <span class="divider">-</span>
+                <input type="date" id="end_date">
+            </div>
+            </div>
+        </div>
+
+        <!-- Grupo de botões -->
+        <div class="button-group" style="display: flex; align-items: center; gap: 10px;">
+            <button id="apply-filters-btn">Aplicar Filtros</button>
+            <button id="clear-filters-btn">Limpar Filtros</button>
+            <button class="scroll-btn left">◀</button>
+            <button class="scroll-btn right">▶</button>
+        </div>
+
+    </div>
+
+    <div class="table-container">
+        <table id="metrics-table">
+            <thead>
+                <tr>
+                <th data-sort="account_id">Account ID</th>
+                <th data-sort="campaign_id">Campaign ID</th>
+                <th data-sort="clicks">Clicks</th>
+                <th data-sort="conversions">Conversions</th>
+                <th data-sort="impressions">Impressions</th>
+                <th data-sort="interactions">Interactions</th>
+                <th data-sort="date">Date</th>
+                <th class="admin-only" data-sort="cost_micros" style="display: none;">Cost Micros</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <div class="pagination">
+      <button id="prev-page-btn">Anterior</button>
+      <span id="page-info">Página 1</span>
+      <button id="next-page-btn">Próxima</button>
+    </div>
+  </div>
+    <div id="error-popup" style="display: none;">
+        <div class="popup-content error">
+            <span class="close-btn" onclick="hidePopup()">&times;</span>
+            <h3>Erro</h3>
+            <p id="error-popup-message"></p>
+        </div>
+    </div>
+    <div id="success-popup" style="display: none;">
+        <div class="popup-content success">
+            <span class="close-btn" onclick="hidePopup()">&times;</span>
+            <h3>Sucesso</h3>
+            <p id="success-popup-message"></p>
+        </div>
+    </div>
+
+    <div id="popup-wrapper" style="display: none;">
+        <div id="popup-content" class="popup-content">
+            <span class="close-btn" onclick="hidePopup()">&times;</span>
+            <h3 id="popup-title"></h3>
+            <p id="popup-message"></p>
+        </div>
+    </div>
+  <script src="script.js"></script>
+</body>
+</html>

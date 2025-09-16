@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: case_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: mydb
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./data:/app/data
+      - ./setup.sql:/setup.sql
+    ports:
+      - "5433:5432"
+
+  api:
+    build: ./api
+    container_name: case_api
+    restart: always
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/mydb
+      SECRET_KEY: "uma_chave_super_secreta_e_segura_aqui"
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./api:/app
+      - ./data:/app/data
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+
+  frontend:
+    image: nginx:alpine
+    container_name: case_frontend
+    volumes:
+      - ./frontend:/usr/share/nginx/html
+    ports:
+      - "8080:80"
+    depends_on:
+      - api
+
+volumes:
+  pgdata:
