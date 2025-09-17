@@ -20,8 +20,8 @@ Siga os passos abaixo para subir a aplicação:
 1.  **Clone o Repositório:**
 
     ```bash
-    git clone [https://www.youtube.com/watch?v=GRf6so_sois](https://www.youtube.com/watch?v=GRf6so_sois)
-    cd [nome-da-pasta]
+    git clone https://github.com/AlineBrunetti/Case-Monks
+    cd Case-Monks
     ```
 
 2.  **Subir o Ambiente Docker:**
